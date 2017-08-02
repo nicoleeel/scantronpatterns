@@ -27,6 +27,9 @@ for (i in 22:41) {d[,i] = as.factor(d[,i])}
 ###    EDA   ###
 ################
 
+# number of responses in each group
+table(d$Group)
+
 # plot distribution of scores by group
 plot(d$Group, d$final_score)
 # group 1 has the smallest variance - people taking it with
@@ -41,6 +44,27 @@ for (i in c(1,2,3)) {
   print(mean(d[d$Group==i,]$final_score))
 }
 
+
+###################################
+# EXPLORE PATTERNS IN DEMOGRAPHICS
+###################################
+
+# GENDER
+d$GroupNumeric = as.numeric(as.character(d$Group))
+
+m1 = lm(GroupNumeric ~ G1, data = d)
+summary(m1)
+# gender is not related to the group
+
+for (i in c("Male","Female")) {
+  print(mean(d[d$G1==i,]$final_score))
+}
+
+
+
+# GROUP
+lm_group = lm(final_score ~ Group, data = d)
+summary(lm_group)
 
 
 

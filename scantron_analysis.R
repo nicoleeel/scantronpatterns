@@ -1,5 +1,7 @@
 
+# set working directory to the github folder
 setwd("~/Documents/MIDS/W241/scantronpatterns")
+
 wd = getwd()
 d = read.csv(paste(wd,"scantron_scores.csv",sep="/"), header=T)
 head(d)
@@ -14,19 +16,19 @@ d$Group = as.factor(d$Group)
 
 # renaming questions with Q prefix
 names(d)
-names(d)[19:38] = paste("Q",1:20,sep="")
+names(d)[22:41] = paste("Q",1:20,sep="")
 names(d)
 
 # get just first letter of answers & make factors
-d[,19:38] = sapply(d[,19:38], function(x) print(substr(x,1,1)))
-for (i in 19:38) {d[,i] = as.factor(d[,i])}
+d[,22:41] = sapply(d[,22:41], function(x) print(substr(x,1,1)))
+for (i in 22:41) {d[,i] = as.factor(d[,i])}
 
 ################
 ###    EDA   ###
 ################
 
 # plot distribution of scores by group
-plot(d$Group, d$Final_Score)
+plot(d$Group, d$final_score)
 # group 1 has the smallest variance - people taking it with
 # no patterns ends up with more similar scores?
 
@@ -34,7 +36,13 @@ plot(d$Group, d$Final_Score)
 # are some people catching onto the pattern and some people are being
 # thrown off of it? would potentially explain such a high variance?
 
+# print means
+for (i in c(1,2,3)) {
+  print(mean(d[d$Group==i,]$final_score))
+}
 
-# CACE
+
+
+
 
 

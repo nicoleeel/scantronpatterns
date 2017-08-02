@@ -1,4 +1,7 @@
-d = read.csv("~/MIDS/W241/scantron_scores.csv", header=T)
+
+setwd("~/Documents/MIDS/W241/scantronpatterns")
+wd = getwd()
+d = read.csv(paste(wd,"scantron_scores.csv",sep="/"), header=T)
 head(d)
 
 
